@@ -4,8 +4,9 @@ class Parser:
         self.current_token = None
         self.index = 0
         self.errors = []
+
     def match(self, token_type):
-        if self.current_token and self.current_token.type == token_type or self.current_token.value == token_type:
+        if self.current_token and self.current_token.is_token(token_type):
             self.consume()
         else:
             self.error(self.current_token, token_type)
@@ -16,7 +17,7 @@ class Parser:
             self.current_token = self.tokens[self.index]
         else:
             self.current_token.type = "EOF"
-            self.current_token.value = "EOF"
+            self.current_token.value = ""
 
     def error(self, found_token=None, expected_type=None):
         if found_token and expected_type:
@@ -24,24 +25,48 @@ class Parser:
         else:
             self.errors.append("Error: Invalid syntax")
 
+    def parameter_list(self):
+        if self.current_token.is_token("("):
+            self.match("(")
+            while not self.current_token.is_token(")") and not self.current_token.is_token("EOF"):
+                self.match("specifier_type")
+                self.match("ID")
+                if self.current_token.is_token("["):
+                    self.match("[")
+                    if self.current_token.is_token("Num"):
+                        self.match("Num")
+                    self.match("]")
+                if self.current_token.is_token(","):
+                    self.match(",")
+                    if self.current_token.is_token(")"):
+                        self.error(self.current_token, "specifier_type")
+                else:
+                    break
+            self.match(")")
+        else:
+            self.error()
+
+    def function_declaration(self):
+        self.parameter_list()
 
     def var_declaration(self):
-        self.match("specifier_type")
-        self.match("ID")
-        if self.current_token.value == "=":
+        if self.current_token.is_token("="):
             self.match("=")
             self.match("Num")
-        if self.current_token.value == "[":
+        if self.current_token.is_token("["):
             self.match("[")
             self.match("Num")
             self.match("]")
         self.match("semicolon")
 
     def declaration(self):
-        if self.current_token.type == "specifier_type":
-            self.var_declaration()
-        else:
-            self.error()
+        if self.current_token.is_token("specifier_type"):
+            self.match("specifier_type")
+            self.match("ID")
+            if self.current_token.is_token("("):
+                self.function_declaration()
+            else:
+                self.var_declaration()
 
     def parse(self):
         self.current_token = self.tokens[0]
