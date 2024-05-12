@@ -8,7 +8,7 @@ def tokenize_input():
     tokens = tokenizer.tokenize(input_text)
     output_text = ""
     for token in tokens:
-        output_text += f"{token[0]}: {token[1]}\n"
+        output_text += f"{token.type}: {token.value}\n"
     gui.set_output_text(output_text)
 
 def parse_input():
