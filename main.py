@@ -8,7 +8,7 @@ import threading
 # Function to read tests from file and populate the global list
 def read_tests_from_file():
     try:
-        with open("Tests.txt", "r") as file:
+        with open("Tests.txt", "r", encoding="UTF-8") as file:
             tests = file.read().split("###")
             tests = [test.strip() for test in tests if test.strip()]
             return tests
