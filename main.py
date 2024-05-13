@@ -6,6 +6,7 @@ import requests
 import threading
 import os
 
+
 # Function to read tests from file and populate the global list
 def read_tests_from_file():
     try:
@@ -17,18 +18,19 @@ def read_tests_from_file():
         print("Tests file not found.")
         return []
 
+
 # Global variables
 tests_list = read_tests_from_file()
 current_test_index = 0
 
 SentMessages = []
+
+
 def formate_message(inputText, outputTokens, outputSyntax):
     if not inputText: inputText = "Empty input\n"
     if not outputTokens: outputTokens = "No tokens\n"
     if not outputSyntax: outputSyntax = "No syntax\n"
     return f"\n\nInput from {os.getenv("USERNAME")}:\n```{inputText}\n```\nTokens:\n```\n{outputTokens}\n```\nSyntax:\n```\n{outputSyntax}\n```\n═════════════════════════════════════════════════════════════════════════════════════════════════"
-
-
 
 
 def run_with_timeout(func):
@@ -39,7 +41,7 @@ def run_with_timeout(func):
 
     thread = threading.Thread(target=target)
     thread.start()
-    thread.join(timeout=3)  # Wait for 3 seconds
+    thread.join(timeout=3600)  # Wait for 3 seconds
 
     return result[0] if not thread.is_alive() else "Exceeded 3 seconds"
 
@@ -51,30 +53,26 @@ def main_output(inputText):
     outputSyntax = "\n".join(syntax) if syntax else "Parsing successful"
     return (outputTokens, outputSyntax)
 
+
 # Tokenize input function
 def tokenize_input():
     global tests_list, current_test_index
     input_text = gui.get_input_text()
     tokens_output, syntax_output = main_output(input_text)
-
     gui.set_output_text(tokens_output)
-
     update_test_list(input_text)
     update_current_index()
-
     send_message_to_bot(formate_message(input_text, tokens_output, syntax_output))
+
 
 # Parse input function
 def parse_input():
     global tests_list, current_test_index
     input_text = gui.get_input_text()
-
     tokens_output, syntax_output = main_output(input_text)
-
     gui.set_output_text(syntax_output)
     update_test_list(input_text)
     update_current_index()
-
     send_message_to_bot(formate_message(input_text, tokens_output, syntax_output))
 
 
@@ -91,6 +89,7 @@ def send_message_to_bot(message):
     # Start a new thread to send the request
     threading.Thread(target=send_request).start()
 
+
 # Update test list function
 def update_test_list(new_test):
     if new_test == "": return
@@ -98,13 +97,15 @@ def update_test_list(new_test):
     if new_test not in tests_list:
 
         tests_list.append(new_test)
-        with open("Tests.txt", "a") as file:
+        with open("Tests.txt", "a" , encoding="UTF-8") as file:
             file.write(f"{new_test}\n###\n")
+
 
 # Update current index function
 def update_current_index():
     global current_test_index
     current_test_index = len(tests_list) - 1
+
 
 # Show next test function
 def show_next_test():
@@ -113,6 +114,7 @@ def show_next_test():
     current_test_index = (current_test_index + 1) % len(tests_list)
     gui.set_input_text(tests_list[current_test_index])
 
+
 # Show previous test function
 def show_previous_test():
     global current_test_index
@@ -120,9 +122,11 @@ def show_previous_test():
     current_test_index = (current_test_index - 1) % len(tests_list)
     gui.set_input_text(tests_list[current_test_index])
 
+
 # Clear boxes function
 def clear_boxes():
     gui.clear_boxes()
+
 
 # Initialize GUI
 gui = GUI(tokenize_command=tokenize_input, parse_command=parse_input, clear_command=clear_boxes,
