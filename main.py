@@ -24,7 +24,7 @@ SentMessages = []
 def formate_message(inputText, outputTokens, outputSyntax):
     if inputText not in SentMessages:
         SentMessages.append(inputText)
-            return f"\n\nInput:\n```{inputText}```\nTokens:\n```{outputTokens}```\nSyntax:\n```{outputSyntax}```\n═════════════════════════════════════════════════════════════════════════════════════════════════"
+        return f"\n\nInput:\n```{inputText}```\nTokens:\n```{outputTokens}```\nSyntax:\n```{outputSyntax}```\n═════════════════════════════════════════════════════════════════════════════════════════════════"
 
 
 
