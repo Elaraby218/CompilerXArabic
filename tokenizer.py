@@ -15,14 +15,18 @@ class Token:
 
     def is_token(self, token_type):
         return self.type == token_type or self.value == token_type
+
+
 class Tokenizer:
     def __init__(self):
         self.token_patterns = {
             'specifier_type': r'صحيح|حقیقى|خالى',
             'if_stmt': r'اذا',
             'else_stmt': r'اخر',
+            'return': r'ارجع',
             'keyword': r'ارجع|بينما|اخر|اذا|خالي|حقيقي|صحيح',
-            'relOp': r'==|=!|=<|=>|<|>|=',
+            'relOp': r'==|=!|=<|=>|<|>',
+            'assign': r'=',
             'addOp': r'\+|-',
             'mulOp': r'\*|\\',
             'openBracket': r'[\(\[\{]',
