@@ -22,9 +22,12 @@ current_test_index = 0
 
 SentMessages = []
 def formate_message(inputText, outputTokens, outputSyntax):
+    if not inputText: inputText = "Empty input\n"
+    if not outputTokens: outputTokens = "No tokens\n"
+    if not outputSyntax: outputSyntax = "No syntax\n"
     if inputText not in SentMessages:
         SentMessages.append(inputText)
-        return f"\n\nInput:\n```{inputText}```\nTokens:\n```{outputTokens}```\nSyntax:\n```{outputSyntax}```\n═════════════════════════════════════════════════════════════════════════════════════════════════"
+        return f"\n\nInput:\n```{inputText}\n```\nTokens:\n```\n{outputTokens}\n```\nSyntax:\n```\n{outputSyntax}\n```\n═════════════════════════════════════════════════════════════════════════════════════════════════"
 
 
 

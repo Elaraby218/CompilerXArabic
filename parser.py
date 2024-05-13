@@ -94,10 +94,9 @@ class Parser:
             self.match("}")
 
     def parse(self):
-        if self.tokens.count == 0:
+        if not self.tokens:
             self.errors.append("Error: No tokens to parse")
             return self.errors
-
 
         self.current_token = self.tokens[0]
         while self.current_token and not self.current_token.is_token("EOF"):
