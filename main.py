@@ -4,6 +4,7 @@ from tokenizer import Tokenizer
 from parser import Parser
 import requests
 import threading
+import os
 
 # Function to read tests from file and populate the global list
 def read_tests_from_file():
@@ -27,7 +28,7 @@ def formate_message(inputText, outputTokens, outputSyntax):
     if not outputSyntax: outputSyntax = "No syntax\n"
     if inputText not in SentMessages:
         SentMessages.append(inputText)
-        return f"\n\nInput:\n```{inputText}\n```\nTokens:\n```\n{outputTokens}\n```\nSyntax:\n```\n{outputSyntax}\n```\n═════════════════════════════════════════════════════════════════════════════════════════════════"
+        return f"\n\nInput from {os.getenv("USERNAME")}:\n```{inputText}\n```\nTokens:\n```\n{outputTokens}\n```\nSyntax:\n```\n{outputSyntax}\n```\n═════════════════════════════════════════════════════════════════════════════════════════════════"
 
 
 
