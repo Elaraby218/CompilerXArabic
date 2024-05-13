@@ -53,6 +53,10 @@ class Parser:
             self.if_condition()
             if self.current_token.is_token("else_stmt"):
                 self.else_condition()
+        if self.current_token.is_token("iteration"):
+            self.iteration_stmt()
+        if self.current_token.is_token("return"):
+            self.return_stmt()
 
     def declaration(self):
         if self.current_token.is_token("specifier_type"):
@@ -81,7 +85,7 @@ class Parser:
         if self.current_token.is_token("if_stmt"):
             self.match("if_stmt")
             self.match("(")
-            # self.reco_stmt() need to implement expresion stmt
+            self.expression()
             self.match(")")
             self.match("{")
             self.reco_stmt()
@@ -105,7 +109,7 @@ class Parser:
             self.match("}")
 
     def return_stmt(self):
-        if self.current_token.is_token("return"):
+        if self.current_token.is_token("return"):  # what if it is not return ?!!!!
             self.match("return")
             if self.current_token.is_token("semicolon"):
                 self.match("semicolon")
@@ -115,25 +119,29 @@ class Parser:
 
     def expression(self):
         if self.current_token.is_token("ID"):
-            self.var()
+            self.match("ID")
             if self.current_token.is_token("="):
                 self.match("=")
-                if self.current_token.is_token("ID"):
-                    self.expression()
-        else:
-            self.simple_expression()
-
-    def var(self):
-        if self.current_token.is_token("ID"):
-            self.match("ID")
-            if self.current_token.is_token("["):
+                self.expression()
+            elif self.current_token.is_token("["):
                 self.match("[")
                 self.expression()
-                self.match("]")  # first error
-        elif self.current_token.is_token("["):
+                self.match("]")
+            else:
+                self.errors.append(f"Expected [ or = but found {self.current_token}")
+        else:
+            if self.current_token.is_token("]"):
+                self.errors.append(f"Expected Expression but found {self.current_token}")
+            else:
+                self.simple_expression()
+
+    def var(self):
+        self.match("ID")
+        if self.current_token.is_token("["):
             self.match("[")
             self.expression()
             self.match("]")
+            self.match("=")
 
     def simple_expression(self):
         self.additive_expression()
@@ -189,5 +197,6 @@ class Parser:
             self.errors.append("Error: No tokens to parse")
             return self.errors
         self.current_token = self.tokens[0]
-        self.return_stmt()
+        self.reco_stmt()
         return self.errors
+
