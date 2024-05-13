@@ -92,6 +92,7 @@ def send_message_to_bot(message):
 
 # Update test list function
 def update_test_list(new_test):
+    if new_test == "": return
     global tests_list
     if new_test not in tests_list:
         tests_list.append(new_test)
