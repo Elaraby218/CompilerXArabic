@@ -66,6 +66,8 @@ class Tokenizer:
     def __init__(self):
         self.token_patterns = {
             'specifier_type': r'صحيح|حقیقى|خالى',
+            'if_stmt': r'اذا',
+            'else_stmt': r'اخر',
             'keyword': r'ارجع|بينما|اخر|اذا|خالي|حقيقي|صحيح',
             'relOp': r'==|=!|=<|=>|<|>|=',
             'addOp': r'\+|-',
