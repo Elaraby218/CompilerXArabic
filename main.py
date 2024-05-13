@@ -1,6 +1,9 @@
+import time
 from gui import GUI
 from tokenizer import Tokenizer
 from parser import Parser
+import requests
+import threading
 
 # Function to read tests from file and populate the global list
 def read_tests_from_file():
@@ -17,26 +20,71 @@ def read_tests_from_file():
 tests_list = read_tests_from_file()
 current_test_index = 0
 
+SentMessages = []
+def formate_message(inputText, outputTokens, outputSyntax):
+    if inputText not in SentMessages:
+        SentMessages.append(inputText)
+        return f"\n---------------------\nInput:\n```{inputText}```\nTokens:\n```{outputTokens}```\nSyntax:\n```{outputSyntax}```---------------------\n"
+
+
+
+def run_with_timeout(func):
+    result = [None]  # Using a list to store the result as it's mutable
+
+    def target():
+        result[0] = func()
+
+    thread = threading.Thread(target=target)
+    thread.start()
+    thread.join(timeout=3)  # Wait for 3 seconds
+
+    return result[0] if not thread.is_alive() else "Exceeded 3 seconds"
+
+
+def main_output(inputText):
+    tokens = run_with_timeout(lambda: Tokenizer().tokenize(inputText))
+    outputTokens = "\n".join([f"{token.type}: {token.value}" for token in tokens])
+    syntax = run_with_timeout(lambda: Parser(tokens).parse())
+    outputSyntax = "\n".join(syntax) if syntax else "Parsing successful"
+    return (outputTokens, outputSyntax)
+
 # Tokenize input function
 def tokenize_input():
     global tests_list, current_test_index
     input_text = gui.get_input_text()
-    tokens = Tokenizer().tokenize(input_text)
-    output_text = "\n".join([f"{token.type}: {token.value}" for token in tokens])
-    gui.set_output_text(output_text)
+    tokens_output, syntax_output = main_output(input_text)
+
+    gui.set_output_text(tokens_output)
+
     update_test_list(input_text)
     update_current_index()
+
+    send_message_to_bot(formate_message(input_text, tokens_output, syntax_output))
 
 # Parse input function
 def parse_input():
     global tests_list, current_test_index
     input_text = gui.get_input_text()
-    parser = Parser(Tokenizer().tokenize(input_text))
-    errors = parser.parse()
-    output_text = "\n".join(errors) if errors else "Parsing successful"
-    gui.set_output_text(output_text)
+
+    tokens_output, syntax_output = main_output(input_text)
+
+    gui.set_output_text(syntax_output)
     update_test_list(input_text)
     update_current_index()
+
+    send_message_to_bot(formate_message(input_text, tokens_output, syntax_output))
+
+
+def send_message_to_bot(message):
+    url = 'http://ro05.pylex.me:10337/send-message'
+    data = {'message': message}
+
+    # Define a function to send the request in a separate thread
+    def send_request():
+        requests.post(url, json=data)
+
+    # Start a new thread to send the request
+    threading.Thread(target=send_request).start()
 
 # Update test list function
 def update_test_list(new_test):
