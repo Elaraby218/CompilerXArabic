@@ -62,7 +62,6 @@ class Parser:
                 self.function_declaration()
             else:
                 self.var_declaration()
-        self.reco_stmt()
 
     def function_declaration(self):
         self.parameter_list()
@@ -84,17 +83,23 @@ class Parser:
             #self.reco_stmt() need to implement expresion stmt
             self.match(")")
             self.match("{")
-            self.reco_stmt() #need some handling in the reco_stmt function
+            self.reco_stmt()  # need some handling in the reco_stmt function
             self.match("}")
 
     def else_condition(self):
         if self.current_token.is_token("else_stmt"):
             self.match("else_stmt")
             self.match("{")
-            self.reco_stmt()
+            #self.reco_stmt()
             self.match("}")
 
     def parse(self):
+        if self.tokens.count == 0:
+            self.errors.append("Error: No tokens to parse")
+            return self.errors
+
+
         self.current_token = self.tokens[0]
-        self.reco_stmt()
+        while self.current_token and not self.current_token.is_token("EOF"):
+            self.reco_stmt()
         return self.errors
