@@ -103,12 +103,14 @@ def update_current_index():
 # Show next test function
 def show_next_test():
     global current_test_index
+    if not tests_list: return
     current_test_index = (current_test_index + 1) % len(tests_list)
     gui.set_input_text(tests_list[current_test_index])
 
 # Show previous test function
 def show_previous_test():
     global current_test_index
+    if not tests_list: return
     current_test_index = (current_test_index - 1) % len(tests_list)
     gui.set_input_text(tests_list[current_test_index])
 
