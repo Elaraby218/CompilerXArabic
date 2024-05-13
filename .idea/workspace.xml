@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="31b72383-64d4-40a6-b563-f5441484eec3" name="Changes" comment="Added Feature (Input History)">
+    <list default="true" id="31b72383-64d4-40a6-b563-f5441484eec3" name="Changes" comment="More Tests.txt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Tests.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/parser.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +160,23 @@
       <option name="project" value="LOCAL" />
       <updated>1715598079919</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Log Every Input in Discord Server / Added Timeout for functions">
+      <option name="closed" value="true" />
+      <created>1715620369662</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1715620369662</updated>
+    </task>
+    <task id="LOCAL-00011" summary="More Tests.txt">
+      <option name="closed" value="true" />
+      <created>1715620405976</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1715620405976</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -175,7 +189,9 @@
     <MESSAGE value="Removed Code for testing." />
     <MESSAGE value="Project Settings." />
     <MESSAGE value="Added Feature (Input History)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Feature (Input History)" />
+    <MESSAGE value="Log Every Input in Discord Server / Added Timeout for functions" />
+    <MESSAGE value="More Tests.txt" />
+    <option name="LAST_COMMIT_MESSAGE" value="More Tests.txt" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
