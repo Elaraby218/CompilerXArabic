@@ -46,6 +46,23 @@ class Parser:
         else:
             self.error()
 
+    def reco_stmt(self):
+        if self.current_token.is_token("specifier_type"):
+            self.declaration()
+        if self.current_token.is_token("if_stmt"):
+            self.if_condition()
+            if self.current_token.is_token("else_stmt"):
+                self.else_condition()
+
+    def declaration(self):
+        if self.current_token.is_token("specifier_type"):
+            self.match("specifier_type")
+            self.match("ID")
+            if self.current_token.is_token("("):
+                self.function_declaration()
+            else:
+                self.var_declaration()
+
     def function_declaration(self):
         self.parameter_list()
 
@@ -59,16 +76,24 @@ class Parser:
             self.match("]")
         self.match("semicolon")
 
-    def declaration(self):
-        if self.current_token.is_token("specifier_type"):
-            self.match("specifier_type")
-            self.match("ID")
-            if self.current_token.is_token("("):
-                self.function_declaration()
-            else:
-                self.var_declaration()
+    def if_condition(self):
+        if self.current_token.is_token("if_stmt"):
+            self.match("if_stmt")
+            self.match("(")
+            #self.reco_stmt() need to implement expresion stmt
+            self.match(")")
+            self.match("{")
+            #self.reco_stmt() need some handling in the reco_stmt function
+            self.match("}")
+
+    def else_condition(self):
+        if self.current_token.is_token("else_stmt"):
+            self.match("else_stmt")
+            self.match("{")
+            #self.reco_stmt()
+            self.match("}")
 
     def parse(self):
         self.current_token = self.tokens[0]
-        self.declaration()
+        self.reco_stmt()
         return self.errors
