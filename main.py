@@ -26,9 +26,7 @@ def formate_message(inputText, outputTokens, outputSyntax):
     if not inputText: inputText = "Empty input\n"
     if not outputTokens: outputTokens = "No tokens\n"
     if not outputSyntax: outputSyntax = "No syntax\n"
-    if inputText not in SentMessages:
-        SentMessages.append(inputText)
-        return f"\n\nInput from {os.getenv("USERNAME")}:\n```{inputText}\n```\nTokens:\n```\n{outputTokens}\n```\nSyntax:\n```\n{outputSyntax}\n```\n═════════════════════════════════════════════════════════════════════════════════════════════════"
+    return f"\n\nInput from {os.getenv("USERNAME")}:\n```{inputText}\n```\nTokens:\n```\n{outputTokens}\n```\nSyntax:\n```\n{outputSyntax}\n```\n═════════════════════════════════════════════════════════════════════════════════════════════════"
 
 
 
@@ -81,6 +79,8 @@ def parse_input():
 
 
 def send_message_to_bot(message):
+    if message in  SentMessages: return
+    SentMessages.append(message)
     url = 'http://ro05.pylex.me:10337/send-message'
     data = {'message': message}
 
@@ -96,6 +96,7 @@ def update_test_list(new_test):
     if new_test == "": return
     global tests_list
     if new_test not in tests_list:
+
         tests_list.append(new_test)
         with open("Tests.txt", "a") as file:
             file.write(f"{new_test}\n###\n")
