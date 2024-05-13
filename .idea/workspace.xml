@@ -4,22 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="31b72383-64d4-40a6-b563-f5441484eec3" name="Changes" comment="Added Feature (Input History)">
+    <list default="true" id="31b72383-64d4-40a6-b563-f5441484eec3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Tests.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -35,21 +29,12 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;Python.Lark.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Testing.executor&quot;: &quot;Run&quot;,
-    &quot;Python.gui.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Debug&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;
   }
 }</component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\Computer Science\My Level 3 (Second Term)\تطوير البرمجيات Compiler\Project\CopmilerXArabic\CompilerXArabic\Testing" />
-    </key>
-  </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="CompilerXArabic" />
@@ -90,102 +75,17 @@
       <option name="presentableId" value="Default" />
       <updated>1715469276993</updated>
     </task>
-    <task id="LOCAL-00001" summary="Using Token Class">
-      <option name="closed" value="true" />
-      <created>1715480762633</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1715480762633</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Implemented initial parsing for variable declarations and resolved error message issues.">
-      <option name="closed" value="true" />
-      <created>1715480847690</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1715480847690</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Added Token Class and Added Token Type (Open racket/CloseBracket)">
-      <option name="closed" value="true" />
-      <created>1715480881111</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1715480881111</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Settings">
-      <option name="closed" value="true" />
-      <created>1715480895341</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1715480895341</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Inital Version of Parser (Added Declaration normal variable/array/ function header)">
-      <option name="closed" value="true" />
-      <created>1715487536647</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1715487536647</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Added function  is_token in Token Class easy usage">
-      <option name="closed" value="true" />
-      <created>1715487558546</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1715487558546</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Removed Code for testing.">
-      <option name="closed" value="true" />
-      <created>1715495178319</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1715495178319</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Project Settings.">
-      <option name="closed" value="true" />
-      <created>1715495208562</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1715495208562</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Added Feature (Input History)">
-      <option name="closed" value="true" />
-      <created>1715598079919</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1715598079919</updated>
-    </task>
-    <option name="localTasksCounter" value="10" />
     <servers />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Using Token Class" />
-    <MESSAGE value="Implemented initial parsing for variable declarations and resolved error message issues." />
-    <MESSAGE value="Added Token Class and Added Token Type (Open racket/CloseBracket)" />
-    <MESSAGE value="Settings" />
-    <MESSAGE value="Inital Version of Parser (Added Declaration normal variable/array/ function header)" />
-    <MESSAGE value="Added function  is_token in Token Class easy usage" />
-    <MESSAGE value="Removed Code for testing." />
-    <MESSAGE value="Project Settings." />
-    <MESSAGE value="Added Feature (Input History)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Feature (Input History)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <default-breakpoints>
-        <breakpoint type="python-exception">
-          <properties notifyOnTerminate="true" exception="BaseException">
-            <option name="notifyOnTerminate" value="true" />
-          </properties>
-        </breakpoint>
-      </default-breakpoints>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>16</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
     </breakpoint-manager>
   </component>
 </project>

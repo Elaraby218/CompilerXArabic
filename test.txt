@@ -1,8 +1,15 @@
-if(  exp  )
+if(exp)
 {
     if(exp)
     {
+        if(exp)
+        {
 
+        }
+        else
+        {
+
+        }
     }
     else
     {
@@ -25,4 +32,18 @@ else
 if()
  asdfasdf ;
 
+
+if(){               first reco
+    int a ;         second reco
+    if()            second reco
+    {
+        int a ;     third reco
+        if()        third reco
+        {
+        }
+    }
+    else            third reco
+    {
+    }
+}                   second reco   ---> undefined behavior
 
