@@ -61,6 +61,8 @@ class Parser:
             self.return_stmt()
         elif self.is_factor() or self.current_token.is_token("semicolon"):
             self.expression_stmt()
+        elif self.current_token.is_token("iteration"):
+            self.iteration_stmt()
 
     # 3 - declaration -> var-declaration | function-declaration
     def declaration(self):
@@ -227,6 +229,7 @@ class Parser:
             self.errors.append("Error: No tokens to parse")
             return self.errors
         self.current_token = self.tokens[0]
-        self.statement()
+        while self.current_token.type != "EOF":
+            self.statement()
         return self.errors
 
