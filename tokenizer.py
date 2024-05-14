@@ -24,6 +24,7 @@ class Tokenizer:
             'if_stmt': r'اذا',
             'else_stmt': r'اخر',
             'return': r'ارجع',
+            'iteration': r'بينما',
             'keyword': r'ارجع|بينما|اخر|اذا|خالي|حقيقي|صحيح',
             'relOp': r'==|=!|=<|=>|<|>',
             'assign': r'=',
