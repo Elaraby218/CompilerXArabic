@@ -99,6 +99,7 @@ class Parser:
             self.match("{")
             self.statement()
             self.match("}")
+        self.statement()
 
     # 13 - statement -> selection-statement
     #      selection-statement -> else-stmt
@@ -108,6 +109,7 @@ class Parser:
             self.match("{")
             self.statement()
             self.match("}")
+        self.statement()
 
     # 13 - statement -> iteration-statement
     # 16 - iteration-statement -> while ( expression ) statement
@@ -120,18 +122,19 @@ class Parser:
             self.match("{")
             self.statement()
             self.match("}")
+        self.statement()
 
     # 13 - statement -> return-statement
     # 17 - return-statement -> return ; | return expression ;
     def return_stmt(self):
-        if self.current_token.is_token("return"):  # what if it is not return ?!!!!
-            self.match("return")
-            if self.current_token.is_token("semicolon"):
-                self.match("semicolon")
-            else:
-                self.expression()
-                self.match("semicolon")  # second error
-                # match semicolon could be called one here
+        self.match("return")
+        if self.current_token.is_token("semicolon"):
+            self.match("semicolon")
+        else:
+            self.expression()
+            self.match("semicolon")  # second error
+            # match semicolon could be called one here
+        self.statement()
 
     # 14 - expression-stmt -> expression ; | ;
     def expression_stmt(self):
@@ -204,11 +207,11 @@ class Parser:
 
     # 28 - call -> ID ( args )
     def call(self):
-        if self.current_token.is_token("ID"):
-            self.match("ID")
-            self.match("(")
-            self.args()
-            self.match(")")
+        # if self.current_token.is_token("ID"): from the function that called me i know that the current token is ID
+        self.match("ID")
+        self.match("(")
+        self.args()
+        self.match(")")
 
     # 28 - args -> arg-list | empty
     def args(self):
@@ -227,7 +230,7 @@ class Parser:
             self.errors.append("Error: No tokens to parse")
             return self.errors
         self.current_token = self.tokens[0]
+       # while not self.current_token.is_token("EOF"): # do not remove it, it is important
         self.statement()
         return self.errors
     # this is my branch
-
