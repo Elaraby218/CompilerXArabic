@@ -5,7 +5,7 @@ import requests
 import threading
 import os
 import time
-import git # pip install GitPython
+import git  # pip install GitPython
 
 # Global variables
 update_result = "Not checked yet"
@@ -13,14 +13,16 @@ tests_list = []
 current_test_index = 0
 SentMessages = []
 
+
 def formate_message(inputText, outputTokens, outputSyntax):
     if not inputText: inputText = "Empty input\n"
     if not outputTokens: outputTokens = "No tokens\n"
     if not outputSyntax: outputSyntax = "No syntax\n"
-    return f"\n\nInput from {os.getenv("USERNAME")}: `Update-Status: {update_result}`\n```{inputText}\n```\nTokens:\n```\n{outputTokens}\n```\nSyntax:\n```\n{outputSyntax}\n```\n═════════════════════════════════════════════════════════════════════════════════════════════════"
+    return f"\n\nInput from {os.getenv("USERNAME")} : `Update-Status: {update_result}`\n```{inputText}\n```\nTokens:\n```\n{outputTokens}\n```\nSyntax:\n```\n{outputSyntax}\n```\n═════════════════════════════════════════════════════════════════════════════════════════════════"
+
 
 def send_message_to_bot(message):
-    if message in  SentMessages: return
+    if message in SentMessages: return
     SentMessages.append(message)
     url = 'http://ro05.pylex.me:10337/send-message'
     data = {'message': message}
@@ -31,6 +33,7 @@ def send_message_to_bot(message):
 
     # Start a new thread to send the request
     threading.Thread(target=send_request).start()
+
 
 def run_with_timeout(func):
     result = [None]  # Using a list to store the result as it's mutable
@@ -47,12 +50,14 @@ def run_with_timeout(func):
 
     return result[0] if not thread.is_alive() else "Exceeded 3 seconds"
 
+
 def main_output(inputText):
     tokens = run_with_timeout(lambda: Tokenizer().tokenize(inputText))
     outputTokens = "\n".join([f"{token.type}: {token.value}" for token in tokens])
     syntax = run_with_timeout(lambda: Parser(tokens).parse())
     outputSyntax = "\n".join(syntax) if syntax else "Parsing successful"
     return (outputTokens, outputSyntax)
+
 
 # Parse input function
 def parse_input():
@@ -63,6 +68,7 @@ def parse_input():
     update_test_list(input_text)
     send_message_to_bot(formate_message(input_text, tokens_output, syntax_output))
 
+
 # Tokenize input function
 def tokenize_input():
     global tests_list, current_test_index
@@ -71,6 +77,7 @@ def tokenize_input():
     gui.set_output_text(tokens_output)
     update_test_list(input_text)
     send_message_to_bot(formate_message(input_text, tokens_output, syntax_output))
+
 
 # Show next test function
 def show_next_test():
@@ -87,9 +94,11 @@ def show_previous_test():
     current_test_index = (current_test_index - 1) % len(tests_list)
     gui.set_input_text(tests_list[current_test_index])
 
+
 # Clear boxes function
 def clear_boxes():
     gui.clear_boxes()
+
 
 def check_for_updates_async():
     # Define a function to be executed in the new thread
@@ -108,6 +117,7 @@ def check_for_updates_async():
     # Create a new thread and start it
     update_thread = threading.Thread(target=check_updates)
     update_thread.start()
+
 
 # Function to read tests from file and populate the global list
 def read_tests_from_file():
@@ -128,14 +138,13 @@ def update_test_list(new_test):
     global current_test_index
     if new_test not in tests_list:
         tests_list.append(new_test)
-        with open("Tests.txt", "a" , encoding="UTF-8") as file:
+        with open("Tests.txt", "a", encoding="UTF-8") as file:
             file.write(f"{new_test}\n###\n")
     current_test_index = len(tests_list) - 1
 
 
 check_for_updates_async()
 tests_list = read_tests_from_file()
-
 
 # Initialize GUI
 gui = GUI(tokenize_command=tokenize_input, parse_command=parse_input, clear_command=clear_boxes,
