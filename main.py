@@ -17,7 +17,7 @@ def formate_message(inputText, outputTokens, outputSyntax):
     if not inputText: inputText = "Empty input\n"
     if not outputTokens: outputTokens = "No tokens\n"
     if not outputSyntax: outputSyntax = "No syntax\n"
-    return f"\n\nInput from {os.getenv("USERNAME")}: `{update_result}`\n```{inputText}\n```\nTokens:\n```\n{outputTokens}\n```\nSyntax:\n```\n{outputSyntax}\n```\n═════════════════════════════════════════════════════════════════════════════════════════════════"
+    return f"\n\nInput from {os.getenv("USERNAME")}: `Update-Status: {update_result}`\n```{inputText}\n```\nTokens:\n```\n{outputTokens}\n```\nSyntax:\n```\n{outputSyntax}\n```\n═════════════════════════════════════════════════════════════════════════════════════════════════"
 
 def send_message_to_bot(message):
     if message in  SentMessages: return
