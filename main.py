@@ -18,7 +18,8 @@ def formate_message(inputText, outputTokens, outputSyntax):
     if not inputText: inputText = "Empty input\n"
     if not outputTokens: outputTokens = "No tokens\n"
     if not outputSyntax: outputSyntax = "No syntax\n"
-    return f"\n\nInput from {os.getenv("USERNAME")} : `Update-Status: {update_result}`\n```{inputText}\n```\nTokens:\n```\n{outputTokens}\n```\nSyntax:\n```\n{outputSyntax}\n```\n═════════════════════════════════════════════════════════════════════════════════════════════════"
+    #{os.getenv("USERNAME")}
+    return f"\n\nInput from Elaraby : `Update-Status: {update_result}`\n```{inputText}\n```\nTokens:\n```\n{outputTokens}\n```\nSyntax:\n```\n{outputSyntax}\n```\n═════════════════════════════════════════════════════════════════════════════════════════════════"
 
 
 def send_message_to_bot(message):
@@ -43,7 +44,7 @@ def run_with_timeout(func):
 
     thread = threading.Thread(target=target)
     thread.start()
-    thread.join(timeout=3)  # Wait for 3 seconds
+    thread.join(timeout=3600)  # Wait for 3 seconds
 
     if thread.is_alive():
         print(f"Function {func.__name__} exceeded 3 seconds")
@@ -102,17 +103,17 @@ def clear_boxes():
 
 def check_for_updates_async():
     # Define a function to be executed in the new thread
-    def check_updates():
+    def check_updates(branch_name='Elaraby-Call'):
         global update_result
         repo = git.Repo('.')
         origin = repo.remotes.origin
         origin.fetch()
         current_commit = repo.head.commit
-        latest_remote_commit = origin.refs.master.commit  # Assuming you are checking the 'master' branch, change if necessary
+        latest_remote_commit = origin.refs[branch_name].commit
         if current_commit == latest_remote_commit:
-            update_result = "Up to date ✅"
+            update_result = f"Up to date with {branch_name} ✅"
         else:
-            update_result = "Warning: Outdated 🟥"
+            update_result = f"Warning: Outdated with {branch_name} 🟥"
 
     # Create a new thread and start it
     update_thread = threading.Thread(target=check_updates)

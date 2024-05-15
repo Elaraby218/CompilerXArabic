@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31b72383-64d4-40a6-b563-f5441484eec3" name="Changes" comment="More Tests.txt">
+      <change beforePath="$PROJECT_DIR$/.idea/CompilerXArabic.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CompilerXArabic.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Tests.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tokenizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/tokenizer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,29 +25,38 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
   <component name="ProjectId" id="2gLG7Vv6MwpBSbDsmuWI41w0k4e" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.Lark.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Testing.executor&quot;: &quot;Run&quot;,
-    &quot;Python.gui.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.Lark.executor": "Run",
+    "Python.Test.executor": "Run",
+    "Python.Testing.executor": "Run",
+    "Python.gui.executor": "Run",
+    "Python.main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Elaraby-Call",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Computer Science\My Level 3 (Second Term)\تطوير البرمجيات Compiler\Project\CopmilerXArabic\CompilerXArabic\Testing" />
@@ -75,7 +89,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-5a2391486177-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13763.11" />
+        <option value="bundled-python-sdk-d68999036c7f-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.14475.56" />
       </set>
     </attachedChunks>
   </component>
@@ -176,7 +190,79 @@
       <option name="project" value="LOCAL" />
       <updated>1715620405976</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Encoding utf-8 added">
+      <option name="closed" value="true" />
+      <created>1715624062284</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1715624062285</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Time out changed to 3600">
+      <option name="closed" value="true" />
+      <created>1715633036454</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1715633036454</updated>
+    </task>
+    <task id="LOCAL-00014" summary="-reco_stmt() is update and now it could recognize iteration function (no tests done on it)&#10;-reco_stmt() is update and now it could recognize return stmt (no tests done on it)&#10;-if condition now recognizes expression&#10;-fix return-stmt function &#10;-fix expression function&#10;-fix var function">
+      <option name="closed" value="true" />
+      <created>1715633222513</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1715633222513</updated>
+    </task>
+    <task id="LOCAL-00015" summary="return stmt added &#10;assign op added">
+      <option name="closed" value="true" />
+      <created>1715633262506</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1715633262506</updated>
+    </task>
+    <task id="LOCAL-00016" summary="New test cases added and encoding type changed to UTF-8">
+      <option name="closed" value="true" />
+      <created>1715633287793</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1715633287793</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Grammar rules added in this file">
+      <option name="closed" value="true" />
+      <created>1715683627250</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1715683627250</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Refactoring spaces">
+      <option name="closed" value="true" />
+      <created>1715683668966</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1715683668966</updated>
+    </task>
+    <task id="LOCAL-00019" summary="- Rule of function added  &#10;- reco function renamed to statement&#10;- reco function now recognizes the expression-stmt&#10;- Expression statement funciton added &#10;- rewrite expression function&#10;- rewrite Var function&#10;- fix some bugs in function Factor()&#10;- function is factor added">
+      <option name="closed" value="true" />
+      <created>1715683910220</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1715683910220</updated>
+    </task>
+    <task id="LOCAL-00020" summary="new Test cases added">
+      <option name="closed" value="true" />
+      <created>1715683928989</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1715683928989</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -190,8 +276,17 @@
     <MESSAGE value="Project Settings." />
     <MESSAGE value="Added Feature (Input History)" />
     <MESSAGE value="Log Every Input in Discord Server / Added Timeout for functions" />
+    <MESSAGE value="Encoding utf-8 added" />
+    <MESSAGE value="Time out changed to 3600" />
+    <MESSAGE value="-reco_stmt() is update and now it could recognize iteration function (no tests done on it)&#10;-reco_stmt() is update and now it could recognize return stmt (no tests done on it)&#10;-if condition now recognizes expression&#10;-fix return-stmt function &#10;-fix expression function&#10;-fix var function" />
+    <MESSAGE value="return stmt added &#10;assign op added" />
+    <MESSAGE value="New test cases added and encoding type changed to UTF-8" />
+    <MESSAGE value="Grammar rules added in this file" />
+    <MESSAGE value="Refactoring spaces" />
+    <MESSAGE value="- Rule of function added  &#10;- reco function renamed to statement&#10;- reco function now recognizes the expression-stmt&#10;- Expression statement funciton added &#10;- rewrite expression function&#10;- rewrite Var function&#10;- fix some bugs in function Factor()&#10;- function is factor added" />
     <MESSAGE value="More Tests.txt" />
-    <option name="LAST_COMMIT_MESSAGE" value="More Tests.txt" />
+    <MESSAGE value="new Test cases added" />
+    <option name="LAST_COMMIT_MESSAGE" value="new Test cases added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

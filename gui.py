@@ -19,7 +19,7 @@ class GUI:
         self.input_frame.pack(pady=5, padx=10, fill="both")
         self.input_label = tk.Label(self.input_frame, text="Input:")
         self.input_label.pack(side="left", padx=(0, 10))
-        self.input_box = tk.Text(self.input_frame, height=5, width=50)  # Adjusted size
+        self.input_box = tk.Text(self.input_frame, height=10, width=50)  # Adjusted size
         self.input_box.pack(fill="both", expand=False)
 
         # Output Box
