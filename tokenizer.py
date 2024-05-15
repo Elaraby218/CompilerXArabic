@@ -20,12 +20,17 @@ class Token:
 class Tokenizer:
     def __init__(self):
         self.token_patterns = {
-            'specifier_type': r'صحيح|حقيقي|خالى',
-            'if_stmt': r'اذا',
-            'else_stmt': r'اخر',
-            'return': r'ارجع',
-            'iteration': r'بينما',
-            'keyword': r'ارجع|بينما|اخر|اذا|خالي|حقيقي|صحيح',
+            'specifier_type': r'صحيح(?![^\s])|حقيقي(?![^\s])|خالى(?![^\s])',
+            'if_stmt': r'اذا(?![^\s])',
+            'else_stmt': r'اخر(?![^\s])',
+            'return': r'ارجع(?![^\s])',
+            'iteration': r'بينما(?![^\s])',
+
+            # 'if_stmt': r'اذا',
+            # 'else_stmt': r'اخر',
+            # 'return': r'ارجع',
+            # 'iteration': r'بينما',
+            # 'keyword': r'ارجع|بينما|اخر|اذا|خالي|حقيقي|صحيح',
             'relOp': r'==|=!|=<|=>|<|>',
             'assign': r'=',
             'addOp': r'\+|-',
