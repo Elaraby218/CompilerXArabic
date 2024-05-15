@@ -18,8 +18,8 @@ def formate_message(inputText, outputTokens, outputSyntax):
     if not inputText: inputText = "Empty input\n"
     if not outputTokens: outputTokens = "No tokens\n"
     if not outputSyntax: outputSyntax = "No syntax\n"
-    #{os.getenv("USERNAME")}
-    return f"\n\nInput from Elaraby : `Update-Status: {update_result}`\n```{inputText}\n```\nTokens:\n```\n{outputTokens}\n```\nSyntax:\n```\n{outputSyntax}\n```\n═════════════════════════════════════════════════════════════════════════════════════════════════"
+
+    return f"\n\nInput from {os.getenv("USERNAME")} : `Update-Status: {update_result}`\n```{inputText}\n```\nTokens:\n```\n{outputTokens}\n```\nSyntax:\n```\n{outputSyntax}\n```\n═════════════════════════════════════════════════════════════════════════════════════════════════"
 
 
 def send_message_to_bot(message):
@@ -103,7 +103,7 @@ def clear_boxes():
 
 def check_for_updates_async():
     # Define a function to be executed in the new thread
-    def check_updates(branch_name='Elaraby-Call'):
+    def check_updates(branch_name='master'):
         global update_result
         repo = git.Repo('.')
         origin = repo.remotes.origin
