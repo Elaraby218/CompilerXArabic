@@ -53,14 +53,15 @@ class Parser:
             self.declaration()
         elif self.current_token.is_token("if_stmt"):
             self.if_condition()
-            if self.current_token.is_token("else_stmt"):
-                self.else_condition()
         elif self.current_token.is_token("iteration"):
             self.iteration_stmt()
         elif self.current_token.is_token("return"):
             self.return_stmt()
         elif self.is_factor() or self.current_token.is_token("semicolon"):
             self.expression_stmt()
+        elif self.current_token.is_token("else_stmt"):
+            self.errors.append(f"Else statement can not be without IF stmt {self.current_token.line} .. ")
+            self.consume()
 
     # 3 - declaration -> var-declaration | function-declaration
     def declaration(self):
@@ -99,17 +100,17 @@ class Parser:
             self.match("{")
             self.statement()
             self.match("}")
+            if self.current_token.is_token("else_stmt"):
+                self.match("else_stmt")
+                self.match("{")
+                self.statement()
+                self.match("}")
+            else:
+                self.statement()
         self.statement()
 
     # 13 - statement -> selection-statement
     #      selection-statement -> else-stmt
-    def else_condition(self):
-        if self.current_token.is_token("else_stmt"):
-            self.match("else_stmt")
-            self.match("{")
-            self.statement()
-            self.match("}")
-        self.statement()
 
     # 13 - statement -> iteration-statement
     # 16 - iteration-statement -> while ( expression ) statement
@@ -230,7 +231,7 @@ class Parser:
             self.errors.append("Error: No tokens to parse")
             return self.errors
         self.current_token = self.tokens[0]
-       # while not self.current_token.is_token("EOF"): # do not remove it, it is important
+        # while not self.current_token.is_token("EOF"): # do not remove it, it is important
         self.statement()
         return self.errors
     # this is my branch
