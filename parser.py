@@ -6,7 +6,6 @@ class Parser:
         self.errors = []
         self.rules_called = []
 
-
     def track_function(func):
         def wrapper(self, *args, **kwargs):
             self.rules_called.append(func.__name__)
@@ -88,9 +87,7 @@ class Parser:
         self.match("(")
         self.params()
         self.match(")")
-        self.match("{")
         self.compound_stmt()
-        self.match("}")
 
     # 7 - params -> params-list | void
     @track_function
@@ -104,7 +101,8 @@ class Parser:
     def void_till_end_of_line(self):
         line = self.current_token.line
         not_void_list = []
-        while self.current_token.line == line and not self.current_token.is_token(")") and not self.current_token.is_token("EOF"):
+        while self.current_token.line == line and not self.current_token.is_token(
+                ")") and not self.current_token.is_token("EOF"):
             not_void_list.append(self.current_token.value)
             self.consume()
 
@@ -116,7 +114,7 @@ class Parser:
     @track_function
     def parameter_list(self):
         self.param()
-        if self.current_token.is_token(","):
+        if self.current_token.is_token(","):  # if it is not comma it should be close bract
             self.match(",")
             self.parameter_list()
 
@@ -132,13 +130,13 @@ class Parser:
     # 10 - compound-stmt -> { local-declarations statement-list }
     @track_function
     def compound_stmt(self):
+        self.match("{")
         if self.current_token.is_token("specifier_type"):
             self.local_declarations()
-        else:
-            self.errors.append(f"Error: Expected specifier type but found {self.current_token.value} at line {self.current_token.line}")
-            self.consume()
-
-        self.statement_list()
+        elif not self.current_token.is_token("}"):
+            self.statement_list()
+        self.match("}")
+        self.statement()
 
     # 11 - local-declarations -> local-declarations var-declaration | empty
     @track_function
@@ -153,27 +151,27 @@ class Parser:
         while not self.current_token.is_token("}") and not self.current_token.is_token("EOF"):
             self.statement()
 
-
     # 13 - statement -> expression-statement | compound-statement | selection-statement | iteration-statement | return-statement
     @track_function
     def statement(self):
-        if self.current_token.is_token("specifier_type"):
-            self.declaration()
+        if self.current_token.is_token("{"):
+            self.compound_stmt()
+            return
         elif self.current_token.is_token("if_stmt"):
             self.if_condition()
+            return
         elif self.current_token.is_token("iteration"):
             self.iteration_stmt()
+            return
         elif self.current_token.is_token("return"):
             self.return_stmt()
+            return
         elif self.is_factor() or self.current_token.is_token("semicolon"):
             self.expression_stmt()
+            return
         elif self.current_token.is_token("else_stmt"):
             self.errors.append(f"Else statement can not be without IF stmt {self.current_token.line} .. ")
             self.consume()
-        else:
-            self.errors.append(f"Error: Invalid syntax at line {self.current_token.line}")
-            self.consume()
-
 
     # 13 - statement -> selection-statement
     # 15 - selection-statement -> if ( expression ) statement | if ( expression ) statement else statement
