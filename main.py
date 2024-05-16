@@ -64,9 +64,9 @@ def main_output(inputText):
 def parse_input():
     global tests_list, current_test_index
     input_text = gui.get_input_text()
+    update_test_list(input_text)
     tokens_output, syntax_output = main_output(input_text)
     gui.set_output_text(syntax_output)
-    update_test_list(input_text)
     send_message_to_bot(formate_message(input_text, tokens_output, syntax_output))
 
 
@@ -74,9 +74,9 @@ def parse_input():
 def tokenize_input():
     global tests_list, current_test_index
     input_text = gui.get_input_text()
+    update_test_list(input_text)
     tokens_output, syntax_output = main_output(input_text)
     gui.set_output_text(tokens_output)
-    update_test_list(input_text)
     send_message_to_bot(formate_message(input_text, tokens_output, syntax_output))
 
 
