@@ -14,10 +14,13 @@ current_test_index = 0
 SentMessages = []
 
 
+# make me funciton to check if this string hsa content other than spaces
+def has_content(string):
+    return any(c != ' ' and c != '\n' for c in string)
 def formate_message(inputText, outputTokens, outputSyntax):
-    if not inputText: inputText = "Empty input\n"
-    if not outputTokens: outputTokens = "No tokens\n"
-    if not outputSyntax: outputSyntax = "No syntax\n"
+    if not has_content(inputText): inputText = "Empty input\n"
+    if not has_content(outputTokens): outputTokens = "No tokens\n"
+    if not has_content(outputSyntax): outputSyntax = "No syntax\n"
 
     return f"\n\nInput from {os.getenv("USERNAME")} : `Update-Status: {update_result}`\n```{inputText}\n```\nTokens:\n```\n{outputTokens}\n```\nSyntax:\n```\n{outputSyntax}\n```\n═════════════════════════════════════════════════════════════════════════════════════════════════"
 
