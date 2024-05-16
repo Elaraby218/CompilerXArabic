@@ -48,21 +48,29 @@ def run_with_timeout(func):
 
     thread = threading.Thread(target=target)
     thread.start()
-    thread.join(timeout=3)  # Wait for 3 seconds
+    thread.join(timeout=2)  # Wait for 2 seconds
 
     if thread.is_alive():
-        print(f"Function {func.__name__} exceeded 3 seconds")
+        print(f"Function {func.__name__} exceeded 2 seconds, Invalid Syntax!")
 
-    return result[0] if not thread.is_alive() else "Exceeded 3 seconds"
+    return result[0] if not thread.is_alive() else "TLE"
 
 
+input_output_cache = {}
+# Main output function
 def main_output(inputText):
+    if inputText in input_output_cache:
+        return input_output_cache[inputText]
     tokens = run_with_timeout(lambda: Tokenizer().tokenize(inputText))
     outputTokens = "\n".join([f"{token.type}: {token.value}" for token in tokens])
     syntax = run_with_timeout(lambda: Parser(tokens).parse()[0])
+    if "TLE" in syntax:
+        input_output_cache[inputText] = (outputTokens, "Invalid Syntax!", "Invalid Syntax!")
+        return (outputTokens, "Invalid Syntax!", "Invalid Syntax!")
     outputSyntax = "\n".join(syntax) if syntax else "Parsing successful"
     grammar = run_with_timeout(lambda: Parser(tokens).parse()[1])
     outputGrammar = " -->\n".join(grammar) if grammar else "No grammar found"
+    input_output_cache[inputText] = (outputTokens, outputSyntax, outputGrammar)
     return (outputTokens, outputSyntax, outputGrammar)
 
 
