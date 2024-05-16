@@ -330,12 +330,8 @@ class Parser:
     def parse(self):
         if not self.tokens:
             self.errors.append("Error: No tokens to parse")
-            return self.errors
+            return (self.errors, self.rules_called)
         self.current_token = self.tokens[0]
         # while not self.current_token.is_token("EOF"): # do not remove it, it is important
         self.program()
-
-
-    def get_grahmars_used(self):
-        grammars_used = " -> ".join(self.rules_called)
-        return (f"Grammars used: {grammars_used}")
+        return (self.errors, self.rules_called)
