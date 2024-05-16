@@ -20,7 +20,7 @@ class Token:
 class Tokenizer:
     def __init__(self):
         self.token_patterns = {
-            'specifier_type': r'صحيح(?![^\s])|حقيقي(?![^\s])|خالى(?![^\s])',
+            'specifier_type': r'صحيح(?![^\s])|حقيقي(?![^\s])|خالى(?![^\s])|خالي(?![^\s])',
             'if_stmt': r'اذا(?=\s|\()',
             'iteration': r'بينما(?=\s|\()',
             #  'if_stmt': r'اذا(?![^\s])',
