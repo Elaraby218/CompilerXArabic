@@ -1,7 +1,7 @@
 import tkinter as tk
 
 class GUI:
-    def __init__(self, tokenize_command, parse_command, clear_command, show_next_command, show_previous_command):
+    def __init__(self, tokenize_command, parse_command, show_grammar_rules, clear_command, show_next_command, show_previous_command):
         self.root = tk.Tk()
         self.root.title("Token Parser")
         self.root.geometry("600x600")  # Set initial window size
@@ -37,6 +37,8 @@ class GUI:
         self.tokenize_button.pack(side="left", padx=5)
         self.parse_button = tk.Button(self.button_frame, text="Parse", command=parse_command)
         self.parse_button.pack(side="left", padx=5)
+        self.grammar_button = tk.Button(self.button_frame, text="Grammar", command=show_grammar_rules)  # Add this button
+        self.grammar_button.pack(side="left", padx=5)
         self.clear_button = tk.Button(self.button_frame, text="Clear", command=clear_command)
         self.clear_button.pack(side="left", padx=5)
 
