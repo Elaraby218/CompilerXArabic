@@ -48,7 +48,7 @@ def run_with_timeout(func):
 
     thread = threading.Thread(target=target)
     thread.start()
-    thread.join(timeout=3600)  # Wait for 3 seconds
+    thread.join(timeout=3)  # Wait for 3 seconds
 
     if thread.is_alive():
         print(f"Function {func.__name__} exceeded 3 seconds")
