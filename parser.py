@@ -147,6 +147,7 @@ class Parser:
             self.var_declaration()
 
     # 12 - stmt-list -> stmt-list statement | empty
+    @track_function
     def statement_list(self):
         while not self.current_token.is_token("}") and not self.current_token.is_token("EOF"):
             self.statement()
@@ -293,7 +294,6 @@ class Parser:
             self.var()
 
     # if the current token is factor then it supposed to be an expression-stmt
-    @track_function
     def is_factor(self):
         return (
                 self.current_token.is_token("(") or
