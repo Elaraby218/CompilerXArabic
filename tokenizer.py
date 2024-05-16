@@ -21,10 +21,12 @@ class Tokenizer:
     def __init__(self):
         self.token_patterns = {
             'specifier_type': r'صحيح(?![^\s])|حقيقي(?![^\s])|خالى(?![^\s])',
-            'if_stmt': r'اذا(?![^\s])',
+            'if_stmt': r'اذا(?=\s|\()',
+            'iteration': r'بينما(?=\s|\()',
+            #  'if_stmt': r'اذا(?![^\s])',
+            #  'iteration': r'بينما(?![^\s])',
             'else_stmt': r'اخر(?![^\s])',
             'return': r'ارجع(?![^\s])',
-            'iteration': r'بينما(?![^\s])',
 
             # 'if_stmt': r'اذا',
             # 'else_stmt': r'اخر',
