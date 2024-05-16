@@ -173,6 +173,9 @@ class Parser:
         elif self.current_token.is_token("else_stmt"):
             self.errors.append(f"Else statement can not be without IF stmt {self.current_token.line} .. ")
             self.consume()
+        else:
+            self.errors.append(f"Error: Invalid statement at line {self.current_token.line}")
+            self.consume()
 
     # 13 - statement -> selection-statement
     # 15 - selection-statement -> if ( expression ) statement | if ( expression ) statement else statement
@@ -233,7 +236,7 @@ class Parser:
         else:
             self.expression()
             self.match("semicolon")
-        # self.statement() Araby Told me delete this to prvenet inf loop
+        self.statement()
 
     # 18 - expression -> var = expression | simple-expression
     @track_function
