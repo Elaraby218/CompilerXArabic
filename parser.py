@@ -159,7 +159,7 @@ class Parser:
             self.compound_stmt()
             return
         elif self.current_token.is_token("if_stmt"):
-            self.if_condition()
+            self.selection_statement()
             return
         elif self.current_token.is_token("iteration"):
             self.iteration_stmt()
@@ -177,7 +177,7 @@ class Parser:
     # 13 - statement -> selection-statement
     # 15 - selection-statement -> if ( expression ) statement | if ( expression ) statement else statement
     @track_function
-    def if_condition(self):
+    def selection_statement(self):
         if self.current_token.is_token("if_stmt"):
             self.match("if_stmt")
             self.match("(")
@@ -233,7 +233,7 @@ class Parser:
         else:
             self.expression()
             self.match("semicolon")
-        self.statement()
+        # self.statement() Araby Told me delete this to prvenet inf loop
 
     # 18 - expression -> var = expression | simple-expression
     @track_function
