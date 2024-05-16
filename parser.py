@@ -25,29 +25,108 @@ class Parser:
         else:
             self.errors.append("Error: Invalid syntax")
 
+    # 1 - program -> declaration-list
+    def program(self):
+        self.declaration_list()
+
+    # 2 - declaration-list -> declaration-list declaration | declaration
+    def declaration_list(self):
+        while not self.current_token.is_token("EOF"):
+            self.declaration()
+
+    # 3 - declaration -> var-declaration | function-declaration
+    def declaration(self):
+        if self.current_token.is_token("specifier_type"):
+            self.match("specifier_type")
+            self.match("ID")
+            if self.current_token.is_token("("):
+                self.fun_declaration()
+            else:
+                self.var_declaration()
+        else:
+            self.errors.append(
+                f"Error: Expected specifier type but found {self.current_token.value} at line {self.current_token.line}")
+            self.consume()
+        #  self.statement()
+
+    # 4 - var-declaration -> type-specifier ID ; | type-specifier ID [ Num ] ;
+    # Accepted Test Cases:
+    # صحيح س؛
+    # صحيح س[5];
+    def var_declaration(self):
+        if self.current_token.is_token("="):
+            self.match("=")
+            self.match("Num")
+        elif self.current_token.is_token("["):
+            self.match("[")
+            self.match("Num")
+            self.match("]")
+        self.match("semicolon")
+
+    # 6 - function-declaration -> compound-stmt ( params ) ID specifier-type
+    def fun_declaration(self):
+        self.match("(")
+        self.params()
+        self.match(")")
+        self.match("{")
+        self.compound_stmt()
+        self.match("}")
+
+    # 7 - params -> params-list | void
+    def params(self):
+        if self.current_token.is_token("specifier_type"):
+            self.parameter_list()
+        else:
+            self.void_till_end_of_line()
+
+    def void_till_end_of_line(self):
+        line = self.current_token.line
+        not_void_list = []
+        while self.current_token.line == line and not self.current_token.is_token(")") and not self.current_token.is_token("EOF"):
+            not_void_list.append(self.current_token.value)
+            self.consume()
+        not_void_list = " ".join(not_void_list)
+        self.errors.append(f"Error: Expected params or empty but found {not_void_list} at line {line}")
+
     # 8 - params-list -> params-list , param | param
     def parameter_list(self):
-        if self.current_token.is_token("("):
-            self.match("(")
-            while not self.current_token.is_token(")") and not self.current_token.is_token("EOF"):
-                self.match("specifier_type")
-                self.match("ID")
-                if self.current_token.is_token("["):
-                    self.match("[")
-                    if self.current_token.is_token("Num"):
-                        self.match("Num")
-                    self.match("]")
-                if self.current_token.is_token(","):
-                    self.match(",")
-                    if self.current_token.is_token(")"):
-                        self.error(self.current_token, "specifier_type")
-                else:
-                    break
-            self.match(")")
-        else:
-            self.error()
+        self.param()
+        if self.current_token.is_token(","):
+            self.match(",")
+            self.parameter_list()
 
-    # 12 - statement -> expression-statement | compound-statement | selection-statement | iteration-statement | return-statement
+    # 9 - param -> type-specifier ID | type-specifier ID [ ]
+    def param(self):
+        self.match("specifier_type")
+        self.match("ID")
+        if self.current_token.is_token("["):
+            self.match("[")
+            self.match("]")
+
+    # 10 - compound-stmt -> { local-declarations statement-list }
+    def compound_stmt(self):
+        if self.current_token.is_token("specifier_type"):
+            self.local_declarations()
+        else:
+            self.errors.append(f"Error: Expected specifier type but found {self.current_token.value} at line {self.current_token.line}")
+            self.consume()
+
+        self.statement_list()
+
+    # 11 - local-declarations -> local-declarations var-declaration | empty
+    def local_declarations(self):
+        while self.current_token.is_token("specifier_type"):
+            self.match("specifier_type")
+            self.match("ID")
+            self.var_declaration()
+
+    # 12 - stmt-list -> stmt-list statement | empty
+    def statement_list(self):
+        while not self.current_token.is_token("}"):
+            self.statement()
+
+
+    # 13 - statement -> expression-statement | compound-statement | selection-statement | iteration-statement | return-statement
     def statement(self):
         if self.current_token.is_token("specifier_type"):
             self.declaration()
@@ -62,32 +141,6 @@ class Parser:
         elif self.current_token.is_token("else_stmt"):
             self.errors.append(f"Else statement can not be without IF stmt {self.current_token.line} .. ")
             self.consume()
-
-    # 3 - declaration -> var-declaration | function-declaration
-    def declaration(self):
-        if self.current_token.is_token("specifier_type"):
-            self.match("specifier_type")
-            self.match("ID")
-            if self.current_token.is_token("("):
-                self.function_declaration()
-            else:
-                self.var_declaration()
-        self.statement()
-
-    # 6 - function-declaration -> compound-stmt ( params ) ID specifier-type
-    def function_declaration(self):
-        self.parameter_list()
-
-    # 4 - var-declaration -> var-declaration | fun-declaration
-    def var_declaration(self):
-        if self.current_token.is_token("="):
-            self.match("=")
-            self.match("Num")
-        if self.current_token.is_token("["):
-            self.match("[")
-            self.match("Num")
-            self.match("]")
-        self.match("semicolon")
 
     # 13 - statement -> selection-statement
     # 15 - selection-statement -> if ( expression ) statement | if ( expression ) statement else statement
@@ -232,6 +285,6 @@ class Parser:
             return self.errors
         self.current_token = self.tokens[0]
         # while not self.current_token.is_token("EOF"): # do not remove it, it is important
-        self.statement()
+        self.program()
         return self.errors
     # this is my branch
